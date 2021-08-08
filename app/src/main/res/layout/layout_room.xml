@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+        <variable
+            name="position"
+            type="java.lang.Integer"/>
+
+        <variable
+            name="viewModel"
+            type="com.dh.test.zzapkaotalk.ui.main.MainViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        android:onClick="@{() -> viewModel.onClick(viewModel.roomListState.get(position))}">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="8dp"
+            android:layout_gravity="center_vertical"
+            app:setImgSrc="@{viewModel.roomListState.get(position).imageSrc}"
+            tools:src="@drawable/chiwawa"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+        <LinearLayout
+            android:id="@+id/chatLayout"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_margin="8dp"
+            android:orientation="vertical"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/dateTimeLayout"
+            >
+
+            <TextView
+                android:id="@+id/titleTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.roomListState.get(position).title}"
+                android:layout_margin="2dp"
+                android:textColor="@android:color/black"
+                android:textSize="16dp"
+                android:lines="1"
+                android:ellipsize="end"
+                tools:text="분노의 치와와"
+                />
+
+            <TextView
+                android:id="@+id/lastMessageTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@{viewModel.roomListState.get(position).lastChat}"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginBottom="2dp"
+                android:layout_marginEnd="2dp"
+                android:textSize="12dp"
+                android:lines="2"
+                android:ellipsize="end"
+                tools:text="안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요안녕하세요"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/dateTimeLayout"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="8dp"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            >
+
+            <TextView
+                android:id="@+id/dateTimeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:timeText="@{viewModel.roomListState.get(position).createdDateTime}"
+                tools:text="오전 4:42"
+                />
+
+            <TextView
+                android:id="@+id/unreadCountTextView"
+                android:layout_width="30dp"
+                android:layout_height="16dp"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/background_round_rect_red"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:letterSpacing="0"
+                android:lineSpacingExtra="0dp"
+                android:includeFontPadding="false"
+                android:text="@{String.valueOf(viewModel.roomListState.get(position).unreadCount)}"
+                android:visibility="@{viewModel.roomListState.get(position).unreadCount > 0 ? 0x00000000 : 0x00000004}"
+                tools:text="12"
+                />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

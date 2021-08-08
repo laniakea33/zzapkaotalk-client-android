@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+    <data>
+        <variable
+            name="viewModel"
+            type="com.dh.test.zzapkaotalk.ui.chat.ChatViewModel"
+            />
+        <variable
+            name="position"
+            type="Integer"
+            />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        tools:background="@color/purple_200"
+        >
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="4dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:setImgSrc="@{viewModel.chatState.get(position).user.profileImageUrl}"
+            tools:src="@drawable/ic_baseline_account_circle_24"
+            />
+        <Space
+            android:id="@+id/startLine"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHorizontal_bias="0.8"
+            />
+
+        <TextView
+            android:id="@+id/nameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:layout_margin="4dp"
+            android:text="@{viewModel.chatState.get(position).user.displayName}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/imageView"
+            tools:text="18283817230"
+            />
+
+
+        <FrameLayout
+            android:id="@+id/messageContainer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginBottom="4dp"
+            android:background="@drawable/background_round_rect_white"
+            app:layout_constraintWidth_max="wrap"
+            app:layout_constraintEnd_toStartOf="@id/startLine"
+            app:layout_constraintStart_toEndOf="@id/imageView"
+            app:layout_constraintTop_toBottomOf="@id/nameTextView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            >
+
+            <TextView
+                android:id="@+id/messageImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="22dp"
+                android:text="@{viewModel.chatState.get(position).message}"
+                tools:text="안녕?안녕?안녕?안녕?안녕?안녕?안녕?안녕?안녕?안녕?안녕?안녕?안녕?"
+                />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/dateTimeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            tools:text="오후 2:07"
+            app:timeText="@{viewModel.chatState.get(position).dateTime}"
+            app:layout_constraintBottom_toBottomOf="@id/messageContainer"
+            app:layout_constraintStart_toEndOf="@id/messageContainer"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
+
