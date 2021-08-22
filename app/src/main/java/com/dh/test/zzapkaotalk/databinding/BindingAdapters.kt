@@ -1,5 +1,6 @@
 package com.dh.test.zzapkaotalk.databinding
 
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
@@ -23,6 +24,7 @@ fun setImgSrc(view: ImageView, url: String?) {
 
 @BindingAdapter("listItem")
 fun <T> applyListItem(view: RecyclerView, list: List<T>?) {
+    Log.d("dhlog", "applyListItem : ${list?.size}")
     list?.let {
         val adapter = view.adapter
         if (adapter is SecondRecyclerAdapter) {
