@@ -1,4 +1,4 @@
-package com.dh.test.zzapkaotalk.ui.main.ui.theme
+package com.dh.test.zzapkaotalk.ui.compose.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes

@@ -9,6 +9,35 @@
         <entry key="../../../../../layout/compose-model-1629616557173.xml" value="0.25" />
         <entry key="../../../../../layout/compose-model-1629620400111.xml" value="0.1712962962962963" />
         <entry key="../../../../../layout/compose-model-1629621387278.xml" value="0.2620830496936692" />
+        <entry key="../../../../../layout/compose-model-1629624372119.xml" value="0.22685185185185186" />
+        <entry key="../../../../../layout/compose-model-1629624532461.xml" value="0.3264358108108108" />
+        <entry key="../../../../../layout/compose-model-1629624639678.xml" value="0.1" />
+        <entry key="../../../../../layout/compose-model-1629692330980.xml" value="0.2627637848876787" />
+        <entry key="../../../../../layout/compose-model-1630065399201.xml" value="0.32559121621621623" />
+        <entry key="../../../../../layout/compose-model-1630065449825.xml" value="0.32559121621621623" />
+        <entry key="../../../../../layout/compose-model-1630068429334.xml" value="0.2620830496936692" />
+        <entry key="../../../../../layout/compose-model-1630070341206.xml" value="0.5" />
+        <entry key="../../../../../layout/compose-model-1630070341207.xml" value="0.18100611189468735" />
+        <entry key="../../../../../layout/compose-model-1630125682511.xml" value="0.17529518619436876" />
+        <entry key="../../../../../layout/compose-model-1630126512688.xml" value="0.33" />
+        <entry key="../../../../../layout/compose-model-1630128262349.xml" value="0.33" />
+        <entry key="../../../../../layout/compose-model-1630131986766.xml" value="0.2627637848876787" />
+        <entry key="../../../../../layout/compose-model-1630141504576.xml" value="0.2620830496936692" />
+        <entry key="../../../../../layout/compose-model-1630141872907.xml" value="0.109375" />
+        <entry key="../../../../../layout/compose-model-1630141937321.xml" value="0.2722772277227723" />
+        <entry key="../../../../../layout/compose-model-1630141945416.xml" value="0.1925925925925926" />
+        <entry key="../../../../../layout/compose-model-1630144541229.xml" value="0.1" />
+        <entry key="../../../../../layout/compose-model-1630147174324.xml" value="0.14603960396039603" />
+        <entry key="../../../../../layout/compose-model-1630148356447.xml" value="0.109375" />
+        <entry key="../../../../../layout/compose-model-1630148816447.xml" value="0.109375" />
+        <entry key="../../../../../layout/compose-model-1630149238729.xml" value="0.1" />
+        <entry key="../../../../../layout/compose-model-1630191327767.xml" value="0.33" />
+        <entry key="../../../../../layout/compose-model-1630191457710.xml" value="0.1" />
+        <entry key="../../../../../layout/compose-model-1630191460722.xml" value="0.10293333333333334" />
+        <entry key="../../../../../layout/compose-model-1630205447037.xml" value="0.5" />
+        <entry key="../../../../../layout/compose-model-1630205729596.xml" value="0.33" />
+        <entry key="../../../../../layout/compose-model-1630211822011.xml" value="0.5" />
+        <entry key="../../../../../layout/compose-model-1630215449078.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.32592592592592595" />
         <entry key="app/src/main/res/drawable/background_round_rect_orange.xml" value="0.26666666666666666" />
         <entry key="app/src/main/res/drawable/background_round_rect_red.xml" value="0.26666666666666666" />
@@ -19,7 +48,12 @@
         <entry key="app/src/main/res/drawable/ic_launcher_new_foreground.xml" value="0.3" />
         <entry key="app/src/main/res/layout/activity_chat.xml" value="0.37552083333333336" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.37552083333333336" />
+        <entry key="app/src/main/res/layout/activity_user.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/layout_chat_image_my.xml" value="0.28894927536231885" />
         <entry key="app/src/main/res/layout/layout_chat_image_others.xml" value="0.37552083333333336" />
+        <entry key="app/src/main/res/layout/layout_chat_system.xml" value="0.37552083333333336" />
+        <entry key="app/src/main/res/layout/layout_chat_text_my.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/layout_chat_text_others.xml" value="0.18262411347517732" />
         <entry key="app/src/main/res/layout/layout_room.xml" value="0.37552083333333336" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.32592592592592595" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.32592592592592595" />

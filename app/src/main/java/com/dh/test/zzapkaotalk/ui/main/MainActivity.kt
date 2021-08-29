@@ -13,10 +13,9 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
+import androidx.compose.material.icons.filled.Chat
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -26,6 +25,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import com.dh.test.zzapkaotalk.*
 import com.dh.test.zzapkaotalk.R
@@ -34,7 +34,7 @@ import com.dh.test.zzapkaotalk.model.RoomModel
 import com.dh.test.zzapkaotalk.model.RoomRemoveModel
 import com.dh.test.zzapkaotalk.network.Repository
 import com.dh.test.zzapkaotalk.ui.chat.ChatActivity
-import com.dh.test.zzapkaotalk.ui.main.ui.theme.ZzapkaotalkTheme
+import com.dh.test.zzapkaotalk.ui.compose.theme.ZzapkaotalkTheme
 import com.dh.test.zzapkaotalk.ui.user.UserActivity
 import com.google.gson.Gson
 import io.socket.client.IO
@@ -58,6 +58,7 @@ class MainActivity : BaseActivity() {
             ZzapkaotalkTheme {
                 ZzapKaotalkScreen(
                     viewModel,
+                    this::moveInToRoom,
                     this::moveToProfile,
                     this::sendMakeRoomMessage
                 )
@@ -84,12 +85,12 @@ class MainActivity : BaseActivity() {
             }
 
             socket.on("room") {
-                Log.d("dhlog", "메시지 수신")
+                Log.d("dhlog", "ROOM 메시지 수신")
                 val room = Gson().fromJson(it[0].toString(), RoomModel::class.java)
                 runOnUiThread {
                     viewModel.roomReceived(room)
                     if (room.owner == UserHolder.userModel.id) {
-                        moveInToRoom(room.id, room.title)
+                        moveInToRoom(room)
                     }
                 }
                 Log.d("dhlog", room.toString())
@@ -131,21 +132,13 @@ class MainActivity : BaseActivity() {
             viewModel.getRooms()
             initSocket()
         }
-
-        viewModel.roomListState.observe(this) {
-            Log.d("dhlog", "MainActivity roomListState observe : ${it.size}")
-        }
-
-        viewModel.itemClickState.observe(this) {
-            moveInToRoom(it.id, it.title)
-        }
     }
 
-    private fun moveInToRoom(roomNo: Int, roomName: String) {
+    private fun moveInToRoom(room: RoomModel) {
         Intent(this, ChatActivity::class.java)
             .apply {
-                putExtra("roomNo", roomNo)
-                putExtra("roomName", roomName)
+                putExtra("roomNo", room.id)
+                putExtra("roomName", room.title)
             }
             .also {
                 startActivity(it)
@@ -184,10 +177,12 @@ class MainActivity : BaseActivity() {
 @Composable
 fun ZzapKaotalkScreen(
     viewModel: MainViewModel,
+    onRoomClick: (RoomModel) -> Unit,
     onProfileClick: () -> Unit,
     onMakeRoomClick: () -> Unit
 ) {
-    val list by viewModel.roomListState.observeAsState(listOf())
+    //  TODO : 이게 맛이 간거 같다
+//    val list by viewModel.roomListState.observeAsState(listOf())
     Scaffold(
         topBar = {
             ZzapTopAppBar(
@@ -198,8 +193,8 @@ fun ZzapKaotalkScreen(
     ) {
         Surface {
             RoomList(
-                list = list,
-                viewModel::onClick
+                list = viewModel.roomListItems,
+                onClick = onRoomClick,
             )
         }
     }
@@ -272,6 +267,7 @@ fun RoomListPreview() {
     }
 }
 
+@ExperimentalCoilApi
 @Composable
 fun RoomItem(room: RoomModel, onClick: (RoomModel) -> Unit, modifier: Modifier = Modifier) {
     Log.d("dhlog", room.toString())

@@ -20,10 +20,19 @@ object Repository {
             .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun putUser(id: Int, displayName: String, profileImageUrl: String): Single<Response<UserModel>> {
+    fun putUserDisplayName(id: Int, displayName: String): Single<Response<UserModel>> {
         val params = HashMap<String, Any>()
         params["id"] = id
         params["display_name"] = displayName
+
+        return api.putUser(params)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    fun putUserProfileImageUrl(id: Int, profileImageUrl: String): Single<Response<UserModel>> {
+        val params = HashMap<String, Any>()
+        params["id"] = id
         params["profile_image_url"] = profileImageUrl
 
         return api.putUser(params)

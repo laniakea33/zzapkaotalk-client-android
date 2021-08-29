@@ -16,6 +16,15 @@
         android:theme="@style/Theme.Zzapkaotalk"
         android:usesCleartextTraffic="true"
         >
+
+        <activity
+            android:name=".ui.chat.ChatActivity"
+            android:exported="true"
+            android:label="@string/title_activity_new_chat"
+            android:theme="@style/Theme.Zzapkaotalk.NoActionBar"
+            android:windowSoftInputMode="stateHidden|adjustResize"
+            />
+
         <activity
             android:name=".ui.main.MainActivity"
             android:exported="true"
@@ -27,12 +36,12 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
 
-        <activity android:name=".ui.user.UserActivity" />
-
-        <activity android:name=".ui.chat.ChatActivity" />
+        <activity
+            android:name=".ui.user.UserActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan"
+            />
 
         <provider
             android:name="androidx.core.content.FileProvider"

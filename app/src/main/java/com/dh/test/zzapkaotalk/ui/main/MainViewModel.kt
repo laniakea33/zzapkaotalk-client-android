@@ -1,10 +1,11 @@
 package com.dh.test.zzapkaotalk.ui.main
 
 import android.util.Log
+import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.MutableLiveData
 import com.dh.test.zzapkaotalk.BaseViewModel
-import com.dh.test.zzapkaotalk.model.RoomModel
 import com.dh.test.zzapkaotalk.model.RoomLastChatUpdateModel
+import com.dh.test.zzapkaotalk.model.RoomModel
 import com.dh.test.zzapkaotalk.model.UserModel
 import com.dh.test.zzapkaotalk.network.Repository
 import io.reactivex.rxkotlin.plusAssign
@@ -14,8 +15,7 @@ class MainViewModel(
 ): BaseViewModel() {
 
     val userState = MutableLiveData<UserModel>()
-    val roomListState = MutableLiveData<MutableList<RoomModel>>(ArrayList())
-    val itemClickState = MutableLiveData<RoomModel>()
+    val roomListItems = mutableStateListOf<RoomModel>()
 
     fun postUser(deviceId: String) {
         Log.d("dhlog", "MainViewModel postUser()")
@@ -34,7 +34,8 @@ class MainViewModel(
         compositeDisposable += repository.getRooms()
             .subscribe({
                 Log.d("dhlog", "MainViewModel getRooms() 성공")
-                roomListState.value = it.body()?.toMutableList() ?: ArrayList()
+                roomListItems.clear()
+                roomListItems.addAll(it.body()?.toMutableList() ?: return@subscribe)
             }, {
                 Log.d("dhlog", "MainViewModel getRooms() 실패")
                 it.printStackTrace()
@@ -42,40 +43,32 @@ class MainViewModel(
     }
 
     fun roomReceived(room: RoomModel) {
-        val list = roomListState.value ?: return
-        val index = list.indexOfFirst {
+        val index = roomListItems.indexOfFirst {
             it.id == room.id
         }
         if (index == -1) {
-            list.add(room)
+            roomListItems += room
         } else {
-            list[index] = room
+            roomListItems[index] = room
         }
-        roomListState.value = list
     }
 
     fun lastChatUpdated(roomLastChat: RoomLastChatUpdateModel) {
-        val list = roomListState.value ?: return
-        val index = list.indexOfFirst {
+        val index = roomListItems.indexOfFirst {
             it.id == roomLastChat.roomNo
         }
-        val item = list[index]
-        item.lastChat = roomLastChat.lastChat
-        roomListState.value = list
-    }
-
-    fun onClick(room: RoomModel) {
-        itemClickState.value = room
+        val room = roomListItems[index].copy(
+            lastChat = roomLastChat.lastChat
+        )
+        roomListItems[index] = room
     }
 
     fun removeRoomReceived(roomNo: Int) {
-        val list = roomListState.value
-        val i = list!!.indexOfFirst {
+        val index = roomListItems.indexOfFirst {
             it.id == roomNo
         }
-        if (i != -1) {
-            list.removeAt(i)
-            roomListState.value = list!!
+        if (index != -1) {
+            roomListItems.removeAt(index)
         }
     }
 }
